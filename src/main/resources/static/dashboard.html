@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | Credit Risk System</title>
+  <link rel="stylesheet" href="/css/app.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Operations</p>
+      <h1>Credit Risk Dashboard</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/applications.html">Applications</a>
+      <a href="/admin.html">Admin</a>
+      <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+    </nav>
+  </header>
+
+  <main class="page-grid">
+    <section class="metrics-grid" id="metricsCards"></section>
+    <section class="panel wide">
+      <div class="panel-head">
+        <h2>Applications by Status</h2>
+        <p id="applicationsChartMeta" class="hint"></p>
+      </div>
+      <div class="chart-shell">
+        <canvas id="applicationsChart"></canvas>
+      </div>
+      <div id="applicationsStatusList" class="status-breakdown"></div>
+    </section>
+    <section class="panel wide">
+      <div class="panel-head">
+        <h2>Decisions by Status</h2>
+        <p id="decisionsChartMeta" class="hint"></p>
+      </div>
+      <div class="chart-shell">
+        <canvas id="decisionsChart"></canvas>
+      </div>
+      <div id="decisionsStatusList" class="status-breakdown"></div>
+    </section>
+  </main>
+  <script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

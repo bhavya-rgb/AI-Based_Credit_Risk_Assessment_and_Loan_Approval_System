@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | Credit Risk System</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body class="auth-shell">
+  <main class="auth-card">
+    <div class="brand-block">
+      <p class="eyebrow">AI Loan Approval</p>
+      <h1>Credit Risk Assessment Console</h1>
+      <p class="muted">Spring Boot + MySQL full-stack system with paper-aligned risk pipeline scaffolding.</p>
+    </div>
+    <form id="loginForm" class="panel stack">
+      <label>Email<input name="email" type="email" value="admin@creditrisk.local" required /></label>
+      <label>Password<input name="password" type="password" value="Admin@123" required /></label>
+      <button type="submit" class="btn btn-primary">Login</button>
+      <p id="loginError" class="error"></p>
+      <p class="hint">Seeded admin (dev): <code>admin@creditrisk.local / Admin@123</code></p>
+    </form>
+  </main>
+  <script type="module" src="/js/login.js"></script>
+</body>
+</html>

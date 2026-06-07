@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | Credit Risk System</title>
+  <link rel="stylesheet" href="/css/app.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header class="topbar compact">
+  <div>
+    <p class="eyebrow">Admin & ML Ops</p>
+    <h1>Dataset, Training, Model Registry</h1>
+  </div>
+  <nav class="nav-links">
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/applications.html">Applications</a>
+    <a href="/admin.html">Admin</a>
+    <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+  </nav>
+</header>
+
+<main class="page-grid">
+  <section class="panel stack">
+    <div class="panel-head"><h2>Import Dataset</h2></div>
+    <form id="datasetForm" class="stack compact-form">
+      <label>CSV Path<input name="sourcePath" placeholder="./data/lending_club_synthetic.csv" required /></label>
+      <label>Source Name<input name="sourceName" placeholder="lending-club-2007-2015" /></label>
+      <div class="inline-controls">
+        <button id="useProjectDatasetPathBtn" class="btn btn-secondary" type="button">Use Project Dataset Path</button>
+      </div>
+      <p class="hint">Startup auto-import is enabled by default and uses the project dataset path if no CSV exists.</p>
+      <button class="btn btn-primary" type="submit">Import & Profile</button>
+      <p id="datasetMsg" class="hint"></p>
+      <p id="latestDatasetInfo" class="hint"></p>
+    </form>
+  </section>
+
+  <section class="panel stack">
+    <div class="panel-head"><h2>Start Training Run</h2></div>
+    <form id="trainingForm" class="stack compact-form">
+      <label>Dataset Version<input name="datasetVersion" required /></label>
+      <label>Run Mode
+        <select name="mode">
+          <option value="BASELINE">BASELINE</option>
+          <option value="HSFSFOA">HSFSFOA</option>
+          <option value="ISSA_XGBOOST">ISSA_XGBOOST</option>
+        </select>
+      </label>
+      <label>Feature Policy<input name="featurePolicy" value="application_time_only" /></label>
+      <button class="btn btn-primary" type="submit">Train Model</button>
+      <p id="trainingMsg" class="hint"></p>
+    </form>
+  </section>
+
+  <section class="panel wide stack">
+    <div class="panel-head row-between">
+      <h2>Models</h2>
+      <button id="refreshModelsBtn" class="btn btn-secondary">Refresh</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Version</th><th>Status</th><th>Type</th><th>Dataset</th><th>Actions</th></tr></thead>
+        <tbody id="modelsTbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel wide stack">
+    <div class="panel-head"><h2>Decision Outcomes</h2></div>
+    <canvas id="outcomesChart" height="120"></canvas>
+  </section>
+
+  <section class="panel wide stack">
+    <div class="panel-head"><h2>Recent Audit Logs</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ID</th><th>Action</th><th>Entity</th><th>Entity ID</th><th>IP</th><th>Created</th></tr></thead>
+        <tbody id="auditTbody"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="/js/admin.js"></script>
+</body>
+</html>

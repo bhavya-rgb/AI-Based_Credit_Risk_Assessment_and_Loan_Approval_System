@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: credit-risk-system
+  datasource:
+    url: ${DB_URL:jdbc:h2:mem:creditrisk;MODE=MySQL;DB_CLOSE_DELAY=-1;DATABASE_TO_LOWER=TRUE}
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+app:
+  security:
+    jwt:
+      issuer: credit-risk-system
+      access-token-minutes: 60
+      refresh-token-days: 7
+      secret: ${JWT_SECRET:replace-this-with-a-long-dev-secret-key-1234567890}
+  model:
+    artifacts-path: ${MODEL_ARTIFACTS_PATH:./model-artifacts}
+  admin:
+    seed-admin-email: ${SEED_ADMIN_EMAIL:admin@creditrisk.local}
+    seed-admin-password: ${SEED_ADMIN_PASSWORD:Admin@123}
+  dataset:
+    bootstrap:
+      enabled: ${DATASET_BOOTSTRAP_ENABLED:true}
+      source-path: ${DATASET_BOOTSTRAP_SOURCE_PATH:./data/lending_club_synthetic.csv}
+      source-name: ${DATASET_BOOTSTRAP_SOURCE_NAME:lending-club-synthetic}
+      generate-if-missing: ${DATASET_BOOTSTRAP_GENERATE_IF_MISSING:true}
+      rows: ${DATASET_BOOTSTRAP_ROWS:5000}
+      random-seed: ${DATASET_BOOTSTRAP_RANDOM_SEED:42}
+      skip-if-already-imported: ${DATASET_BOOTSTRAP_SKIP_IF_ALREADY_IMPORTED:true}
+      fail-on-error: ${DATASET_BOOTSTRAP_FAIL_ON_ERROR:false}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html

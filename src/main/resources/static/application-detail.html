@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Detail | Credit Risk System</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+<header class="topbar compact">
+  <div>
+    <p class="eyebrow">Case Review</p>
+    <h1 id="pageTitle">Loan Application</h1>
+  </div>
+  <nav class="nav-links">
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/applications.html">Applications</a>
+    <a href="/admin.html">Admin</a>
+    <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+  </nav>
+</header>
+
+<main class="page-grid">
+  <section class="panel wide stack">
+    <div class="panel-head row-between">
+      <h2>Application Overview</h2>
+      <div class="inline-controls">
+        <button id="submitBtn" class="btn btn-secondary">Submit</button>
+        <button id="scoreBtn" class="btn btn-primary">Run AI Score</button>
+      </div>
+    </div>
+    <pre id="applicationJson" class="json-view"></pre>
+  </section>
+
+  <section class="panel stack">
+    <div class="panel-head"><h2>Latest Risk Assessment</h2></div>
+    <div id="latestAssessment" class="stack"></div>
+  </section>
+
+  <section class="panel stack">
+    <div class="panel-head"><h2>Decision Action</h2></div>
+    <form id="decisionForm" class="stack compact-form">
+      <label>Decision
+        <select name="decisionStatus" required>
+          <option value="APPROVED">APPROVED</option>
+          <option value="DECLINED">DECLINED</option>
+          <option value="MANUAL_REVIEW">MANUAL_REVIEW</option>
+        </select>
+      </label>
+      <div class="grid-2">
+        <label>Approved Amount<input name="approvedAmount" type="number" step="0.01" /></label>
+        <label>Approved Term (Months)<input name="approvedTermMonths" type="number" /></label>
+      </div>
+      <label>Interest Rate Offer<input name="interestRateOffer" type="number" step="0.0001" /></label>
+      <label>Override Reason<textarea name="overrideReason" rows="3" placeholder="Required if overriding AI recommendation"></textarea></label>
+      <button class="btn btn-primary" type="submit">Submit Decision</button>
+      <p id="decisionMsg" class="hint"></p>
+    </form>
+  </section>
+
+  <section class="panel wide stack">
+    <div class="panel-head"><h2>Assessment History</h2></div>
+    <div id="assessmentHistory" class="stack"></div>
+  </section>
+</main>
+
+<script type="module" src="/js/application-detail.js"></script>
+</body>
+</html>

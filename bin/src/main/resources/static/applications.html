@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applications | Credit Risk System</title>
+  <link rel="stylesheet" href="/css/app.css" />
+</head>
+<body>
+<header class="topbar compact">
+  <div>
+    <p class="eyebrow">Workflow</p>
+    <h1>Applicants & Loan Applications</h1>
+  </div>
+  <nav class="nav-links">
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/applications.html">Applications</a>
+    <a href="/admin.html">Admin</a>
+    <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+  </nav>
+</header>
+
+<main class="split-layout">
+  <section class="panel stack">
+    <div class="panel-head"><h2>Create Applicant</h2></div>
+    <form id="applicantForm" class="stack compact-form">
+      <div class="grid-2">
+        <label>First Name<input name="firstName" required /></label>
+        <label>Last Name<input name="lastName" required /></label>
+      </div>
+      <div class="grid-2">
+        <label>Date of Birth<input type="date" name="dob" required /></label>
+        <label>Phone<input name="phone" required /></label>
+      </div>
+      <label>Email<input type="email" name="email" required /></label>
+      <label>Government ID<input name="governmentId" required /></label>
+      <button class="btn btn-primary" type="submit">Create Applicant</button>
+      <p id="applicantFormMsg" class="hint"></p>
+    </form>
+  </section>
+
+  <section class="panel stack">
+    <div class="panel-head"><h2>Create Loan Application</h2></div>
+    <form id="loanForm" class="stack compact-form">
+      <div class="grid-2">
+        <label>Applicant ID<input name="applicantId" type="number" required /></label>
+        <label>Loan Amount<input name="loanAmount" type="number" step="0.01" required /></label>
+      </div>
+      <div class="grid-2">
+        <label>Term Months<input name="termMonths" type="number" value="36" required /></label>
+        <label>Purpose<input name="purpose" value="debt_consolidation" required /></label>
+      </div>
+      <div class="grid-2">
+        <label>Annual Income<input name="annualIncome" type="number" step="0.01" required /></label>
+        <label>Employment Length (Years)<input name="employmentLengthYears" type="number" value="5" required /></label>
+      </div>
+      <div class="grid-2">
+        <label>Home Ownership<input name="homeOwnership" value="RENT" required /></label>
+        <label>Verification Status<input name="verificationStatus" value="Verified" required /></label>
+      </div>
+      <div class="grid-2">
+        <label>DTI<input name="dti" type="number" step="0.0001" value="0.22" required /></label>
+        <label>Existing Debt<input name="existingDebt" type="number" step="0.01" value="5500" required /></label>
+      </div>
+      <details class="panel subtle" open>
+        <summary>Credit Profile</summary>
+        <div class="grid-2">
+          <label>FICO Low<input name="ficoLow" type="number" value="680" /></label>
+          <label>FICO High<input name="ficoHigh" type="number" value="700" /></label>
+          <label>Inquiries (6m)<input name="inqLast6Months" type="number" value="1" /></label>
+          <label>Delinq (2y)<input name="delinq2Yrs" type="number" value="0" /></label>
+          <label>Open Accounts<input name="openAccounts" type="number" value="8" /></label>
+          <label>Public Records<input name="publicRecords" type="number" value="0" /></label>
+          <label>Revolving Balance<input name="revolvingBalance" type="number" step="0.01" value="4200" /></label>
+          <label>Revolving Utilization<input name="revolvingUtilization" type="number" step="0.0001" value="0.31" /></label>
+          <label>Total Accounts<input name="totalAccounts" type="number" value="16" /></label>
+          <label>Mortgage Accounts<input name="mortgageAccounts" type="number" value="0" /></label>
+          <label>Bankruptcies<input name="bankruptcies" type="number" value="0" /></label>
+        </div>
+      </details>
+      <button class="btn btn-primary" type="submit">Create Application</button>
+      <p id="loanFormMsg" class="hint"></p>
+    </form>
+  </section>
+
+  <section class="panel wide stack">
+    <div class="panel-head row-between">
+      <h2>Application Queue</h2>
+      <div class="inline-controls">
+        <select id="statusFilter">
+          <option value="">All Statuses</option>
+          <option value="DRAFT">DRAFT</option>
+          <option value="SUBMITTED">SUBMITTED</option>
+          <option value="SCORED">SCORED</option>
+          <option value="MANUAL_REVIEW">MANUAL_REVIEW</option>
+          <option value="DECIDED">DECIDED</option>
+        </select>
+        <button id="refreshListBtn" class="btn btn-secondary">Refresh</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>ID</th><th>Applicant</th><th>Amount</th><th>Term</th><th>DTI</th><th>Status</th><th>Submitted</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="applicationsTbody"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="/js/applications.js"></script>
+</body>
+</html>
